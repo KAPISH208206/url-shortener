@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import UrlForm from "./components/UrlForm";
 import ResultCard from "./components/ResultCard";
 import HistoryTable from "./components/HistoryTable";
-import { getAllUrls } from "./utils/api";
+import { getAllUrls, saveUrlLocally } from "./utils/api";
 import "./App.css";
 
 export default function App() {
@@ -10,10 +10,8 @@ export default function App() {
   const [history, setHistory] = useState([]);
 
   const fetchHistory = async () => {
-    try {
-      const { data } = await getAllUrls();
-      setHistory(data);
-    } catch {}
+    const { data } = await getAllUrls();
+    setHistory(data);
   };
 
   useEffect(() => {
@@ -21,6 +19,7 @@ export default function App() {
   }, []);
 
   const handleSuccess = (data) => {
+    saveUrlLocally(data);  // ← only this line added
     setLatestResult(data);
     fetchHistory();
   };
