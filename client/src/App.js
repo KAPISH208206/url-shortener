@@ -4,6 +4,7 @@ import ResultCard from "./components/ResultCard";
 import HistoryTable from "./components/HistoryTable";
 import { getAllUrls, saveUrlLocally } from "./utils/api";
 import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   const [latestResult, setLatestResult] = useState(null);
